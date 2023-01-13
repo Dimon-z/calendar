@@ -1,14 +1,15 @@
     const shablon = [`<table>`,`<tr>`,`<th>ПН</th>`,`<th>ВТ</th>`,`<th>СР</th>`,`<th>ЧТ</th>`,`<th>ПТ</th>`,`<th>СБ</th>`,`<th>ВС</th>`,`<tr>`]
-    let ask = prompt(`введите значения в формате(местоВставки,год,месяц)`,`guf,2023,1`)
-    let args = ask.split(',',)
+    //let ask = prompt(`введите значения в формате(местоВставки,год,месяц)`,`guf,2023,1`)
+    //let args = ask.split(',',)
 
 
-      
       function createCalendar(elem, year, month){
-        if(year === `clear`){
-            elem.innerHTML = ``
+        if(elem===null){
+            elem = `guf`
+            throw new Error(`введите данные`)
         }
         let summatorHTML = [`<table>`,`<tr>`,`<th>ПН</th>`,`<th>ВТ</th>`,`<th>СР</th>`,`<th>ЧТ</th>`,`<th>ПТ</th>`,`<th>СБ</th>`,`<th>ВС</th>`,`<tr>`];
+        elem = document.getElementById(elem)
         // функция заполнения календаря при обходе обькта с датами
         function daysFilling(date,dayOfWeek){
             if (dayOfWeek === 0  ) {
@@ -28,15 +29,14 @@
                   summatorHTML.push(`<td></td>`);
               }
           }
-      }
+        }
        //вспомогательная функция, заполняет ячейки после последней даты
         function fillEmptyDaysEnd(day) {
             if (day === 0){
               return;
             }
             if (day<6) {
-                day = 6;
-                for (let index = 1; index < day; index++) {
+                for (let index = day; index < 7; index++) {
                     summatorHTML.push(`<td>  </td>`);
                 }
             }
@@ -54,6 +54,7 @@
               let newDay = new Date(date.getTime()+day*i)
               daysObj[i+1] = newDay.getDay() 
           };
+          //debugger;
           fillEmptyDaysStart(firstDay)
           for (const key in daysObj) {
               daysFilling(key,daysObj[+key])
@@ -61,11 +62,14 @@
           fillEmptyDaysEnd(lastday)
           let hTML = summatorHTML.toString();
           hTML = hTML.replaceAll(',','')
-          elem.innerHTML = hTML
           summatorHTML = [];
-          console.log(summatorHTML)
           summatorHTML = shablon;
-          console.log(shablon)
-          console.log(summatorHTML.length)
+          if(year === `clear`){
+            elem.innerHTML = ``
+          } else {
+            elem.innerHTML = hTML
+          }
       }
-    createCalendar(...args);
+    //createCalendar(...args);
+    //console.log(`guf,2023,1`)
+    button.onclick = () => createCalendar(...document.getElementById('args').value.split(`,`))
