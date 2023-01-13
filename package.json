@@ -1,0 +1,15 @@
+{
+  "name": "deploycalendar",
+  "version": "1.0.0",
+  "description": "calendar",
+  "main": "main.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^8.31.0"
+  },
+  "devDependencies": {}
+}
