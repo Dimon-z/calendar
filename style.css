@@ -14,4 +14,12 @@
       font-weight: bold;
       background-color: #E6E6E6;
     }
+
+    .prevMonth {
+      color:rgba(0, 0, 0, 0.5);
+    }
+
+    .nextMonth {
+      color:rgba(0, 0, 0, 0.5);
+    }
 </style>
